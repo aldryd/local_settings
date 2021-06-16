@@ -45,8 +45,3 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 "This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
-" Pathogen to manage plugins
-call pathogen#infect()
-
-" vim-airline config
-"let g:airline_powerline_fonts=1
