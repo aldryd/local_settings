@@ -33,9 +33,6 @@ set number
 " colorscheme
 colorscheme jellybeans
 
-" Set the width and height of the window
-set lines=50 columns=110
-
 " Show the 100 character column
 set colorcolumn=100
 
@@ -45,3 +42,23 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 "This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
+" 2 spaces for javascript, typescript, json and yaml
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd Filetype json setlocal ts=2 sts=2 sw=2
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
+
+function! <SID>StripTrailingWhitespaces()
+  " save last search & cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+
+" Enable this line if using the pathogen plugins
+" execute pathogen#infect()
